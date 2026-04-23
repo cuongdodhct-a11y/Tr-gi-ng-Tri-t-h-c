@@ -10,7 +10,42 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion } from "motion/react";
-import { MonitorPlay, Users, Brain, BookOpen, Quote } from "lucide-react";
+import { MonitorPlay, Users, Brain, BookOpen, Quote, Shield } from "lucide-react";
+
+// Tự tạo một Vector Logo SVG thay vì hình ảnh tĩnh, tuân thủ đúng yêu cầu: phẳng (flat), tối giản (minimalist), 
+// cấu trúc hình học (geometric), tone màu xanh quân đội và nhấn nhá vàng subtle (gold accents).
+const EmblemLogo = () => (
+  <motion.div 
+    initial={{ scale: 0.9, opacity: 0 }}
+    animate={{ scale: 1, opacity: 1 }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+    className="flex justify-center mb-8"
+  >
+    <svg viewBox="0 0 120 120" className="w-32 h-32 md:w-40 md:h-40 drop-shadow-2xl" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Outer Military Green Shield/Circle */}
+      <circle cx="60" cy="60" r="58" fill="#1C2E24" />
+      
+      {/* Subtle Gold Accent Rings */}
+      <circle cx="60" cy="60" r="52" stroke="#C5A866" strokeWidth="1" strokeDasharray="3 3"/>
+      <circle cx="60" cy="60" r="50" stroke="#C5A866" strokeWidth="0.5" />
+      
+      {/* Geometric Academic Element (Book / Dialectical structure) */}
+      <path d="M 35 70 L 60 78 L 85 70 L 85 40 L 60 48 L 35 40 Z" fill="#284236" stroke="#FFFFFF" strokeWidth="1.5" strokeLinejoin="round"/>
+      <path d="M 60 48 L 60 78" stroke="#FFFFFF" strokeWidth="1.5" strokeLinejoin="round"/>
+      
+      {/* Central Abstract Pillar/Silhouette (Leadership & Discipline) */}
+      <path d="M 54 48 L 60 38 L 66 48 L 60 62 Z" fill="#C5A866" />
+      <path d="M 60 62 L 60 38" stroke="#1C2E24" strokeWidth="0.5" />
+      
+      {/* Top Star (Military Symbolism) */}
+      <path d="M 60 22 L 62.5 28.5 L 69.5 28.5 L 64 32.5 L 66.5 39 L 60 35 L 53.5 39 L 56 32.5 L 50.5 28.5 L 57.5 28.5 Z" fill="#C5A866"/>
+
+      {/* Monogram Text */}
+      <text x="60" y="98" fontFamily="serif" fontSize="7" fontWeight="bold" fill="#FFFFFF" textAnchor="middle" letterSpacing="0.05em">ĐỖ ĐÌNH CƯỜNG</text>
+      <text x="60" y="106" fontFamily="sans-serif" fontSize="5" fontWeight="bold" fill="#C5A866" textAnchor="middle" letterSpacing="0.2em">SQCT</text>
+    </svg>
+  </motion.div>
+);
 
 const SYSTEM_INSTRUCTION = `Bạn là một AI Video Avatar thời gian thực mô phỏng hình ảnh một nữ giáo sư triết học Việt Nam (35-40 tuổi), có phong thái điềm tĩnh, trí tuệ, là "Giáo sư triết học số" và là trợ giảng của Thầy Cường.
 Bạn sẽ giao tiếp bằng giọng nói chuẩn tiếng Việt (ưu tiên âm điệu miền Bắc học thuật), rõ ràng, có nhấn mạnh khái niệm.
@@ -42,13 +77,14 @@ export default function App() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900" />
         </div>
         
-        <div className="relative z-10 max-w-4xl px-6 text-center space-y-8">
+        <div className="relative z-10 max-w-4xl px-6 text-center space-y-6">
+          <EmblemLogo />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <Badge className="bg-blue-600 text-white border-none mb-6 px-4 py-1 text-sm uppercase tracking-widest font-medium">
+            <Badge className="bg-blue-600/90 backdrop-blur text-white border-none mb-6 px-4 py-1 text-sm uppercase tracking-widest font-medium">
               Trợ giảng điện tử AI
             </Badge>
             <h1 className="text-4xl md:text-6xl font-serif font-bold text-slate-50 leading-tight tracking-tight">
